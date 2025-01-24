@@ -45,6 +45,10 @@ Tower {
 	Synth.new("MonoLooper", [\bufnum, bufnum] ++ params.getPairs);
   }
 
+  loadLoop { arg fn;
+	Buffer.read(Server.default, fn, action: this.playLoop);
+  }
+
   setParam { arg paramKey, paramValue;
 	params[paramKey] = paramValue;
   }
