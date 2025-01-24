@@ -1,5 +1,6 @@
 Tower {
   var <params;
+  var <loopers;
 
   *initClass {
 	StartUp.add {
@@ -61,23 +62,27 @@ Tower {
 	params = Dictionary.newFrom([
 	  \rate, 1;
 	]);
+
+	loopers = Array.newClear(indexedSize: 16);
   }
 
-  playMonoLoop { arg bufnum;
-	Synth.new("MonoLooper", [\bufnum, bufnum] ++ params.getPairs);
+  playMonoLoop { arg bufnum, index;
+	var s = Synth.new("MonoLooper", [\bufnum, bufnum] ++ params.getPairs);
+	loopers.put(index, s);
   }
 
-  playStereoLoop { arg bufnum;
-	Synth.new("StereoLooper", [\bufnum, bufnum] ++ params.getPairs);
+  playStereoLoop { arg bufnum, index;
+	var s = Synth.new("StereoLooper", [\bufnum, bufnum] ++ params.getPairs);
+	loopers.put(index, s);
   }
 
-  loadLoop { arg fn;
+  loadLoop { arg fn, index;
 	Buffer.read(Server.default, fn, action:
 	  { arg buffer;
 		if( buffer.numChannels == 1) {
-		  this.playMonoLoop(buffer.bufnum);
+		  this.playMonoLoop(buffer.bufnum, index);
 		} {
-		  this.playStereoLoop(buffer.bufnum);
+		  this.playStereoLoop(buffer.bufnum, index);
 		};
 	  }
 	);
