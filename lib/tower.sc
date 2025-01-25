@@ -10,7 +10,8 @@ Tower {
 		SynthDef("MonoLooper", {
 		  arg out = 0,
 		  bufnum = 0,
-		  rate = 1;
+		  rate = 1,
+		  amp = 1;
 
 		  var snd, frames;
 
@@ -26,13 +27,16 @@ Tower {
 			loop: 1
 		  );
 
+		  snd = snd * amp;
+
 		  Out.ar(out, snd);
 		}).add;
 
 		SynthDef("StereoLooper", {
 		  arg out = 0,
 		  bufnum = 0,
-		  rate = 1;
+		  rate = 1,
+		  amp = 1;
 
 		  var snd, frames;
 
@@ -48,6 +52,8 @@ Tower {
 			loop: 1
 		  );
 
+		  snd = snd * amp;
+
 		  Out.ar(out, snd);
 		}).add;
 	  }
@@ -60,7 +66,8 @@ Tower {
 
   init {
 	params = Dictionary.newFrom([
-	  \rate, 1;
+	  \rate, 1,
+	  \amp, 1
 	]);
 
 	loopers = Array.newClear(indexedSize: 16);
