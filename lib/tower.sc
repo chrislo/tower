@@ -18,6 +18,9 @@ Tower {
 
 		  var snd, frames;
 
+		  lpfreq = lpfreq.max(20).min(20000);
+		  hpfreq = hpfreq.max(20).min(20000);
+
 		  rate = rate*BufRateScale.kr(bufnum);
 
 		  frames = BufFrames.kr(bufnum);
@@ -49,6 +52,9 @@ Tower {
 		  pos = 0;
 
 		  var snd, frames;
+
+		  lpfreq = lpfreq.max(20).min(20000);
+		  hpfreq = hpfreq.max(20).min(20000);
 
 		  rate = rate*BufRateScale.kr(bufnum);
 
