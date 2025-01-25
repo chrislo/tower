@@ -88,7 +88,8 @@ Tower {
 	);
   }
 
-  setParam { arg paramKey, paramValue;
-	params[paramKey] = paramValue;
+  setParam { arg paramKey, paramValue, index;
+	var looper = loopers[index];
+	looper.set(paramKey, paramValue);
   }
 }
