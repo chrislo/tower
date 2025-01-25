@@ -13,7 +13,8 @@ Tower {
 		  rate = 1,
 		  amp = 1,
 		  lpfreq = 20000,
-		  hpfreq = 20;
+		  hpfreq = 20,
+		  pos = 0;
 
 		  var snd, frames;
 
@@ -33,6 +34,7 @@ Tower {
 		  snd = LPF.ar(in: snd, freq: lpfreq);
 
 		  snd = snd * amp;
+		  snd = Pan2.ar(snd, pos: pos);
 
 		  Out.ar(out, snd);
 		}).add;
@@ -43,7 +45,8 @@ Tower {
 		  rate = 1,
 		  amp = 1,
 		  lpfreq = 20000,
-		  hpfreq = 20;
+		  hpfreq = 20,
+		  pos = 0;
 
 		  var snd, frames;
 
@@ -63,6 +66,7 @@ Tower {
 		  snd = LPF.ar(in: snd, freq: lpfreq);
 
 		  snd = snd * amp;
+		  snd = Balance2.ar(snd[0], snd[1], pos: pos);
 
 		  Out.ar(out, snd);
 		}).add;
@@ -80,6 +84,7 @@ Tower {
 	  \amp, 1,
 	  \lpfreq, 20000,
 	  \hpfreq, 20,
+	  \pos, 0
 	]);
 
 	loopers = Array.newClear(indexedSize: 16);
