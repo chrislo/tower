@@ -11,7 +11,9 @@ Tower {
 		  arg out = 0,
 		  bufnum = 0,
 		  rate = 1,
-		  amp = 1;
+		  amp = 1,
+		  lpfreq = 20000,
+		  hpfreq = 20;
 
 		  var snd, frames;
 
@@ -27,6 +29,9 @@ Tower {
 			loop: 1
 		  );
 
+		  snd = HPF.ar(in: snd, freq: hpfreq);
+		  snd = LPF.ar(in: snd, freq: lpfreq);
+
 		  snd = snd * amp;
 
 		  Out.ar(out, snd);
@@ -36,7 +41,9 @@ Tower {
 		  arg out = 0,
 		  bufnum = 0,
 		  rate = 1,
-		  amp = 1;
+		  amp = 1,
+		  lpfreq = 20000,
+		  hpfreq = 20;
 
 		  var snd, frames;
 
@@ -51,6 +58,9 @@ Tower {
 			startPos: 0,
 			loop: 1
 		  );
+
+		  snd = HPF.ar(in: snd, freq: hpfreq);
+		  snd = LPF.ar(in: snd, freq: lpfreq);
 
 		  snd = snd * amp;
 
@@ -67,7 +77,9 @@ Tower {
   init {
 	params = Dictionary.newFrom([
 	  \rate, 1,
-	  \amp, 1
+	  \amp, 1,
+	  \lpfreq, 20000,
+	  \hpfreq, 20,
 	]);
 
 	loopers = Array.newClear(indexedSize: 16);
