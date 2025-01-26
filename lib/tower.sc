@@ -14,6 +14,7 @@ Tower {
 		  amp = 1,
 		  lpfreq = 20000,
 		  hpfreq = 20,
+		  xfadetime = 0.5,
 		  pos = 0;
 
 		  var snd, frames;
@@ -21,16 +22,15 @@ Tower {
 		  lpfreq = lpfreq.max(20).min(20000);
 		  hpfreq = hpfreq.max(20).min(20000);
 
-		  rate = rate*BufRateScale.kr(bufnum);
-
 		  frames = BufFrames.kr(bufnum);
 
-		  snd = PlayBuf.ar(
+		  snd = XPlayBuf.ar(
 			numChannels:1,
 			bufnum:bufnum,
 			rate: rate,
 			startPos: 0,
-			loop: 1
+			loop: 1,
+			xFadeTime: xfadetime
 		  );
 
 		  snd = HPF.ar(in: snd, freq: hpfreq);
@@ -49,6 +49,7 @@ Tower {
 		  amp = 1,
 		  lpfreq = 20000,
 		  hpfreq = 20,
+		  xfadetime = 0.5,
 		  pos = 0;
 
 		  var snd, frames;
@@ -56,16 +57,15 @@ Tower {
 		  lpfreq = lpfreq.max(20).min(20000);
 		  hpfreq = hpfreq.max(20).min(20000);
 
-		  rate = rate*BufRateScale.kr(bufnum);
-
 		  frames = BufFrames.kr(bufnum);
 
-		  snd = PlayBuf.ar(
+		  snd = XPlayBuf.ar(
 			numChannels:2,
 			bufnum:bufnum,
 			rate: rate,
 			startPos: 0,
-			loop: 1
+			loop: 1,
+			xFadeTime: xfadetime
 		  );
 
 		  snd = HPF.ar(in: snd, freq: hpfreq);
@@ -90,7 +90,8 @@ Tower {
 	  \amp, 1,
 	  \lpfreq, 20000,
 	  \hpfreq, 20,
-	  \pos, 0
+	  \pos, 0,
+	  \xfadetime, 0.5
 	]);
 
 	loopers = Array.newClear(indexedSize: 16);
