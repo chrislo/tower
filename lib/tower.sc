@@ -1,6 +1,7 @@
 Tower {
   var <params;
   var <loopers;
+  var <looper_group;
 
   *initClass {
 	StartUp.add {
@@ -95,15 +96,16 @@ Tower {
 	]);
 
 	loopers = Array.newClear(indexedSize: 16);
+	looper_group = Group.new();
   }
 
   playMonoLoop { arg bufnum, index;
-	var s = Synth.new("MonoLooper", [\bufnum, bufnum] ++ params.getPairs);
+	var s = Synth.new("MonoLooper", [\bufnum, bufnum] ++ params.getPairs, target: looper_group);
 	loopers.put(index, s);
   }
 
   playStereoLoop { arg bufnum, index;
-	var s = Synth.new("StereoLooper", [\bufnum, bufnum] ++ params.getPairs);
+	var s = Synth.new("StereoLooper", [\bufnum, bufnum] ++ params.getPairs, target: looper_group);
 	loopers.put(index, s);
   }
 
